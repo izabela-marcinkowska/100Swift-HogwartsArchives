@@ -38,13 +38,30 @@ struct ContentView: View {
         }
     }
     
+    func setHouseColor(house: String) -> Color {
+        switch house {
+        case "Gryffindor":
+            return .red
+        case "Slytherin":
+            return .green
+        case "Hufflepuff":
+            return .yellow
+        case "Ravenclaw":
+            return .blue
+        default:
+            return .black
+        }
+    }
+    
     var body: some View {
         NavigationStack{
             List(students) { student in
                 NavigationLink(value: student) {
                     VStack (alignment: .leading) {
                         Text(student.name)
+                            
                         Text(student.house ?? "No house")
+                            .foregroundStyle(setHouseColor(house: student.house ?? "Unknows"))
                     }
                 }
             }
