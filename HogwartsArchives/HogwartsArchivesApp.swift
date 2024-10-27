@@ -13,5 +13,6 @@ struct HogwartsArchivesApp: App {
         WindowGroup {
             ContentView()
         }
+        .modelContainer(for: [Student.self, Wand.self])
     }
 }
