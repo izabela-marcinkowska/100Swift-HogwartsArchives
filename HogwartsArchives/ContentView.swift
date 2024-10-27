@@ -19,11 +19,13 @@ struct ContentView: View {
         }
         do {
             let (data, _) = try await URLSession.shared.data(from: url)
+            print("this is data \(data)")
             let decoder = JSONDecoder()
-            
+            print("inside the do")
             if let decodedResponse = try? decoder.decode([Student].self, from: data) {
                 DispatchQueue.main.async {
                     for student in decodedResponse {
+                        print("This is student (\(student.name))")
                         self.modelContext.insert(student)
                     }
                     try? self.modelContext.save()
@@ -42,7 +44,7 @@ struct ContentView: View {
                 NavigationLink(value: student) {
                     VStack (alignment: .leading) {
                         Text(student.name)
-                        Text(student.house)
+                        Text(student.house ?? "No house")
                     }
                 }
             }
